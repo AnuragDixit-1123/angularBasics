@@ -1,14 +1,31 @@
 <p>servers works!</p>
 <!-- 
-     This is the property binding 
+     This is the property binding [disabled]
+     This is the event binding (click)
  -->
 <button 
   class='btn btn-primary' 
   [disabled]='!allowNewServer'
+  
+  (click) = 'onCreateServer()'
 >
     Add Server
 </button>
 <p>{{allowNewServer}}</p>
 <p [innerText]='allowNewServer'></p>
+<p>{{serverCreation}}</p>
+
 <app-server></app-server>
 <app-server></app-server>
+
+<label>Server Name</label>
+<!-- 
+    $event = data emitted with the event it gives us access to
+    event data and is a reserved word
+-->
+<input 
+    type='text'
+    class='form-control'
+    (input)='onUpdateServerName($event)'
+>
+<p>{{serverName}}</p>
