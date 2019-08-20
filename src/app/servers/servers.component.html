@@ -13,19 +13,37 @@
 </button>
 <p>{{allowNewServer}}</p>
 <p [innerText]='allowNewServer'></p>
-<p>{{serverCreation}}</p>
+<!-- <p>{{serverCreation}}</p> -->
+<!-- Example of the Directives -->
 
-<app-server></app-server>
-<app-server></app-server>
+<p *ngIf='serverCreated'>
+        Server was created, server name is {{serverName}}
+    </p>
+<!-- <p *ngIf='serverCreated; else noServer'>
+    Server was created, server name is {{serverName}}
+</p>
+<ng-template #noServer>
+       <p> No Server was created
+    </p>
+</ng-template> -->
 
-<label>Server Name</label>
+<!-- <app-server></app-server> -->
+<!-- <app-server></app-server> -->
+
+<!-- <label>Server Name</label> -->
 <!-- 
     $event = data emitted with the event it gives us access to
     event data and is a reserved word
 -->
-<input 
+<!-- <input 
     type='text'
     class='form-control'
     (input)='onUpdateServerName($event)'
+> -->
+
+<input 
+    type='text'
+    class='form-control'
+    [(ngModel)]='serverName'
 >
-<p>{{serverName}}</p>
+<!-- <p>{{serverName}}</p> -->
