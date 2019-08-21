@@ -6,4 +6,11 @@
      You cannot add block statement here nor you can add the if condition
      although you could easily use the ternary operator over here 
 -->
-<p>{{' Server '}}The Server Component with id {{serverId}} is {{serverStatus}} {{getServerStatus()}}</p>
+
+<!--  [] to bind some property -->
+<p 
+  [ngStyle]="{backgroundColor: getColor()}"
+  [ngClass]= "{online: serverStatus === 'online'}"
+>
+     {{' Server '}}The Server Component with id {{serverId}} is {{serverStatus}} {{getServerStatus()}}
+</p>
