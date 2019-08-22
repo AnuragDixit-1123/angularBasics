@@ -4,7 +4,15 @@ import {
   Input, 
   ViewEncapsulation, 
   OnChanges, 
-  SimpleChanges
+  SimpleChanges,
+  DoCheck,
+  AfterContentInit,
+  AfterContentChecked,
+  AfterViewInit,
+  AfterViewChecked,
+  OnDestroy,
+  ContentChild,
+  ElementRef
 } from '@angular/core';
 
 @Component({
@@ -14,7 +22,15 @@ import {
   encapsulation: ViewEncapsulation.Emulated
   // to disable the encapsulation using the shadow dom and special tags are not added any more
 })
-export class ServerElementComponent implements OnInit, OnChanges {
+export class ServerElementComponent implements 
+  OnInit, 
+  OnChanges, 
+  DoCheck, 
+  AfterContentInit,
+  AfterContentChecked,
+  AfterViewInit,
+  AfterViewChecked,
+  OnDestroy {
 
   /**
    * for binding child with the parent
@@ -24,6 +40,7 @@ export class ServerElementComponent implements OnInit, OnChanges {
    **/ 
   @Input('srvElement') element: {type:string, name:string, content: string}
   @Input() name: string;
+  @ContentChild('contentParagraph', {static: true}) paragraph: ElementRef
 
   constructor() { 
     console.log('constructor server')
@@ -31,10 +48,39 @@ export class ServerElementComponent implements OnInit, OnChanges {
 
   ngOnInit() {
     console.log('ng on init server')
+    console.log('text content of paragraph '+ this.paragraph.nativeElement.textContent)
   }
 
   ngOnChanges(changes: SimpleChanges) {
     console.log('ngOnchanges server', changes)
   }
+
+  ngDoCheck() {
+    console.log('ng do check server' )
+  }
+
+  ngAfterContentInit() {
+    console.log('ng after content init')
+    console.log('text content of paragraph '+ this.paragraph.nativeElement.textContent)
+  }
+
+  ngAfterContentChecked() {
+    console.log('ng AfterContentChecked')
+  }
+
+  ngAfterViewInit() {
+    console.log('ng AfterViewInit')
+  }
+
+  ngAfterViewChecked() {
+    console.log('ng AfterViewChecked')
+  }
+
+  ngOnDestroy() {
+    console.log('ng OnDestroy')
+  }
+
+
+
 
 }
