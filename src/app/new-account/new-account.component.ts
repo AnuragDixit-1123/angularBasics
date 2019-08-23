@@ -7,17 +7,25 @@ import { AccountsService } from '../accounts.service';
   selector: 'app-new-account',
   templateUrl: './new-account.component.html',
   styleUrls: ['./new-account.component.css'],
-  providers: [LoggingService, AccountsService]
+  // providers: [LoggingService]
+  // remove from provider
 })
 export class NewAccountComponent {
 
   // Type is not optional enter the name of class u want to inject
   constructor( private loggingService:LoggingService, 
-    private accountsService: AccountsService ) {}
+    private accountsService: AccountsService 
+    ) {
+
+      this.accountsService.statusUpdated.subscribe(
+        (status: string) => alert('New status: '+ status)
+      )
+    }
 
   onCreateAccount(accountName: string, accountStatus: string) {
    this.accountsService.addAccount(accountName, accountStatus)
-    this.loggingService.logStatusChange(accountStatus)
+   // No need now
+    // this.loggingService.logStatusChange(accountStatus)
 
     // You should not usel it like that
     // const service = new LoggingService();
