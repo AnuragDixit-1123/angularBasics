@@ -1,4 +1,4 @@
-import { Component, ElementRef } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 
 @Component({
@@ -9,14 +9,61 @@ import { NgForm } from '@angular/forms';
 
 export class AppComponent {
 
+  @ViewChild('f', {static: false}) signupForm: NgForm;
+     defaultQuestion = 'pet'
+     answer = ''
+     genders = ['Male', 'Female'] 
+     user = {
+       username: '',
+       email: '',
+       secretQuestion: '',
+       answer: '',
+       gender: ''
+     }
+     submitted = false
+
   suggestUserName() {
     const suggestedName = 'Superuser';
+
+    // Not good option
+    /*
+        this.signupForm.setValue({
+          userData: {
+            username: suggestedName,
+            email: ''
+          },
+          secret: 'pet',
+          questionAnswer: '',
+          gender: 'Male'
+        })
+    */
+   // to override parts of the form
+   this.signupForm.form.patchValue({
+    userData: {
+      username: suggestedName,
+    }
+   })
   }
 
+  /*
   // It is of type HtmlFormElement
   // onSubmit(form: ElementRef) {
     // Type chenges after the introduction of ngForm
   onSubmit(form: NgForm) {
     console.log('clicked', form)
   }
+  */
+
+// Examle of view child
+ onSubmit() {
+  console.log('clicked', this.signupForm)
+  this.submitted = true
+  this.user.username = this.signupForm.value.userData.username;
+  this.user.email = this.signupForm.value.userData.email;
+  this.user.secretQuestion = this.signupForm.value.secret;
+  this.user.answer = this.signupForm.value.questionAnswer;
+  this.user.gender = this.signupForm.value.gender;
+
+  this.signupForm.reset()
+}
 }
