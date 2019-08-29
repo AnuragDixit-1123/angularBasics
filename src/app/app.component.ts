@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef } from '@angular/core';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,15 @@ import { Component } from '@angular/core';
 })
 
 export class AppComponent {
+
+  suggestUserName() {
+    const suggestedName = 'Superuser';
+  }
+
+  // It is of type HtmlFormElement
+  // onSubmit(form: ElementRef) {
+    // Type chenges after the introduction of ngForm
+  onSubmit(form: NgForm) {
+    console.log('clicked', form)
+  }
 }
