@@ -8,31 +8,10 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./app.component.css']
 })
 
-export class AppComponent implements Oninit {
-  loadedPosts = [];
+export class AppComponent {
+  loadedFeature = 'recipe';
 
-  constructor(private http: HttpClient) {}
-
-  ngOnInit() {}
-
-  onCreatePost(postData: { title: string; content: string }) {
-    // Send Http request
-    this.http
-      .post(
-        'https://ng-complete-guide-c56d3.firebaseio.com/posts.json',
-        postData
-      )
-      .subscribe(responseData => {
-        console.log(responseData);
-      });
+  onNavigate(feature: string) {
+    this.loadedFeature = feature;
   }
-
-  onFetchPosts() {
-    // Send Http request
-  }
-
-  onClearPosts() {
-    // Send Http request
-  }
-
 }
